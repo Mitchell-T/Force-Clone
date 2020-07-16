@@ -35,5 +35,5 @@ using MelonLoader;
 [assembly: AssemblyVersion("1.0.2")]
 [assembly: AssemblyFileVersion("1.0.2.0")]
 [assembly: NeutralResourcesLanguage("en")]
-[assembly: MelonModInfo(typeof(ForceClone.fc), "Force Clone", " build 1.0.2", "Huntereb", "")]
+[assembly: MelonModInfo(typeof(ForceClone.Fc), "Force Clone", " build 1.0.2", "Huntereb", "")]
 [assembly: MelonModGame("VRChat", "VRChat")]

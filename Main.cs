@@ -8,7 +8,7 @@ using VRC.Core.BestHTTP;
 
 namespace ForceClone
 {
-    internal class fc : MelonMod
+    internal class Fc : MelonMod
     {
         private Transform AddMenuButton(string butName, Transform parent, string butText, string tooltip, int butX, int butY, System.Action butAction)
         {
@@ -42,7 +42,6 @@ namespace ForceClone
 
             return butTransform;
         }
-
         public static Player GetPlayer(string UserID)
         {
             var Players = PlayerManager.field_Private_Static_PlayerManager_0.field_Private_List_1_Player_0;
@@ -58,20 +57,21 @@ namespace ForceClone
 
             return FoundPlayer;
         }
-
-        public static void showDialog(string title, string message)
+        public static void ShowDialog(string title, string message)
         {
-            Resources.FindObjectsOfTypeAll<VRCUiPopupManager>()[0].Method_Public_Void_String_String_Single_3(title, message, 10f);
+            Resources.FindObjectsOfTypeAll<VRCUiPopupManager>()[0].Method_Public_Void_String_String_Single_0(title, message, 10f);
         }
-
+        public static void CloseMenu()
+        {
+            VRCUiManager.prop_VRCUiManager_0.Method_Public_Void_Boolean_4(false);
+        }
         public override void OnApplicationStart()
         {
             MelonModLogger.Log("Force Clone mod started");
         }
-
         public override void VRChat_OnUiManagerInit()
         {
-            this.AddMenuButton("fcQuickMenu", QuickMenu.prop_QuickMenu_0.transform.Find("UserInteractMenu"), "<color=white>Force Clone Avatar</color>", "Forces the cloning of a public avatar", 0, 1, new System.Action(() =>
+            this.AddMenuButton("fcQuickMenu", QuickMenu.prop_QuickMenu_0.transform.Find("UserInteractMenu"), "<color=white>Force Clone Avatar</color>", "Forces the cloning of a public avatar", -2, -1, new System.Action(() =>
             {
                 var SelectedPlayer = GetPlayer(QuickMenu.prop_QuickMenu_0.field_Private_APIUser_0.id);
                 string AvatarID = SelectedPlayer.prop_VRCAvatarManager_0.field_Private_ApiAvatar_0.id;
@@ -90,12 +90,12 @@ namespace ForceClone
                             }
                         }
                     }.ChangeToSelectedAvatar();
-                    VRCUiManager.prop_VRCUiManager_0.Method_Public_Void_Boolean_2(false);
+                    CloseMenu();
                 }
                 else
                 {
                     MelonModLogger.Log("Avatar ID " + AvatarID + "is private :(");
-                    showDialog("<color=red>Error!</color>", "<color=white>Avatar ID " + AvatarID + " is private!</color>");
+                    ShowDialog("<color=red>Error!</color>", "<color=white>Avatar ID " + AvatarID + " is private!</color>");
                 }
             }));
         }
