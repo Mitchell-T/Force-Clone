@@ -59,15 +59,15 @@ namespace ForceClone
         }
         public static void ShowDialog(string title, string message)
         {
-            Resources.FindObjectsOfTypeAll<VRCUiPopupManager>()[0].Method_Public_Void_String_String_Single_0(title, message, 10f);
+            Resources.FindObjectsOfTypeAll<VRCUiPopupManager>()[0].Method_Public_Void_String_String_Single_1(title, message, 10f);
         }
         public static void CloseMenu()
         {
-            VRCUiManager.prop_VRCUiManager_0.Method_Public_Void_Boolean_4(false);
+            VRCUiManager.prop_VRCUiManager_0.Method_Public_Void_Boolean_1(false);
         }
         public override void OnApplicationStart()
         {
-            MelonModLogger.Log("Force Clone mod started");
+            MelonLogger.Log("Force Clone mod started");
         }
         public override void VRChat_OnUiManagerInit()
         {
@@ -78,7 +78,7 @@ namespace ForceClone
 
                 if (SelectedPlayer.prop_VRCAvatarManager_0.field_Private_ApiAvatar_0.releaseStatus != "private")
                 {
-                    MelonModLogger.Log("Force Cloning avatar with ID: " + AvatarID);
+                    MelonLogger.Log("Force Cloning avatar with ID: " + AvatarID);
                     VRC.Core.API.SendRequest($"avatars/{AvatarID}", HTTPMethods.Get, new ApiModelContainer<ApiAvatar>(), null, true, true, 3600f, 2, null);
                     new PageAvatar
                     {
@@ -94,7 +94,7 @@ namespace ForceClone
                 }
                 else
                 {
-                    MelonModLogger.Log("Avatar ID " + AvatarID + "is private :(");
+                    MelonLogger.Log("Avatar ID " + AvatarID + "is private :(");
                     ShowDialog("<color=red>Error!</color>", "<color=white>Avatar ID " + AvatarID + " is private!</color>");
                 }
             }));
